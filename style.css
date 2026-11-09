@@ -333,7 +333,7 @@ body.menu-open .drawer { transform: translateY(0); }
 .btn--light:hover { border-color: var(--or); color: var(--or); }
 
 /* =========================================================
-   Bandeau
+   Bandeau — le texte s'efface sur les bords
    ========================================================= */
 .band {
   position: relative;
@@ -345,6 +345,10 @@ body.menu-open .drawer { transform: translateY(0); }
   border-top: 1px solid rgba(255,255,255,.09);
   border-bottom: 1px solid rgba(255,255,255,.09);
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg,
+    rgba(0,0,0,0) 0%, #000 12%, #000 88%, rgba(0,0,0,0) 100%);
+          mask-image: linear-gradient(90deg,
+    rgba(0,0,0,0) 0%, #000 12%, #000 88%, rgba(0,0,0,0) 100%);
 }
 .band__track {
   display: flex;
@@ -535,6 +539,34 @@ body.menu-open .drawer { transform: translateY(0); }
   transform: translateY(0);
 }
 
+/* 
+   Éléments qui montent l'un après l'autre, dans une section.
+   Le décalage est posé par le script.
+ */
+.lift {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+.lift.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Le titre de l'accueil monte quand l'écran de chargement s'efface. */
+.hero__tag,
+.hero__title,
+.hero__text,
+.hero__buttons {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .9s var(--ease), transform .9s var(--ease);
+}
+body.pret .hero__tag      { opacity: 1; transform: none; transition-delay: .12s; }
+body.pret .hero__title    { opacity: 1; transform: none; transition-delay: .22s; }
+body.pret .hero__text     { opacity: 1; transform: none; transition-delay: .38s; }
+body.pret .hero__buttons  { opacity: 1; transform: none; transition-delay: .50s; }
+
 /* =========================================================
    Petits écrans
    ========================================================= */
@@ -561,5 +593,8 @@ body.menu-open .drawer { transform: translateY(0); }
     animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
   }
-  .soft { opacity: 1; transform: none; }
+  .soft, .lift,
+  .hero__tag, .hero__title, .hero__text, .hero__buttons {
+    opacity: 1; transform: none;
+  }
 }
