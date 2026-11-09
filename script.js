@@ -373,6 +373,50 @@
   }
 
   /* -------------------------------------------------------
+     12. Le son se coupe quand l'onglet passe en arriere-plan
+     ------------------------------------------------------- */
+  function pauseEnArrierePlan() {
+    function toutesLesPistes() {
+      return document.querySelectorAll('audio');
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      toutesLesPistes().forEach(function (a) {
+        if (document.hidden) {
+          if (!a.paused) {
+            a.setAttribute('data-reprise', '1');
+            a.pause();
+          }
+        } else if (a.getAttribute('data-reprise') === '1') {
+          a.removeAttribute('data-reprise');
+          var p = a.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+      });
+    });
+
+    /* si la fenetre perd le focus (autre onglet, autre application) */
+    window.addEventListener('blur', function () {
+      toutesLesPistes().forEach(function (a) {
+        if (!a.paused) {
+          a.setAttribute('data-reprise', '1');
+          a.pause();
+        }
+      });
+    });
+
+    window.addEventListener('focus', function () {
+      toutesLesPistes().forEach(function (a) {
+        if (a.getAttribute('data-reprise') === '1') {
+          a.removeAttribute('data-reprise');
+          var p = a.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+      });
+    });
+  }
+
+  /* -------------------------------------------------------
      Demarrage
      ------------------------------------------------------- */
   function init() {
@@ -388,6 +432,7 @@
     tilt();
     counters();
     navigation();
+    pauseEnArrierePlan();
 
     setTimeout(function () { document.body.classList.remove('is-locked'); }, 1800);
   }
