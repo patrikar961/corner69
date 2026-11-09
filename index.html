@@ -3,44 +3,199 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CORNER69</title>
-  <meta name="description" content="CORNER69 — 7-24h. Good vibes only.">
+  <title>CORNER69 — 7/24h</title>
+  <meta name="description" content="CORNER69 — ouvert 7j/7, 24h/24. Good vibes only.">
+  <meta name="theme-color" content="#05070d">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CORNER69 — 7/24h">
+  <meta property="og:description" content="Good vibes only. Ouvert jour et nuit.">
+  <meta property="og:image" content="bg.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Image verticale 9:16, affichée en entier -->
-  <div class="background" aria-hidden="true">
-    <img src="bg.jpg" alt="">
+
+  <!-- ===== Preloader ===== -->
+  <div class="loader" id="loader">
+    <div class="loader__inner">
+      <span class="loader__mark">C<span>69</span></span>
+      <div class="loader__bar"><i></i></div>
+    </div>
   </div>
 
-  <div class="overlay"></div>
+  <!-- ===== Image de fond (parallaxe) ===== -->
+  <div class="bg" aria-hidden="true">
+    <img src="bg.jpg" alt="" id="bgImage">
+  </div>
+  <div class="bg__veil" aria-hidden="true"></div>
 
-  <main class="hero">
-    <p class="tagline">7—24h &middot; Good vibes only</p>
-    <h1>CORNER<strong>69</strong></h1>
-    <p class="lede">
-      Bienvenue sur le corner. Ici on roule la nuit, moteur allumé et néons dans les flaques.
-    </p>
+  <!-- ===== Halo qui suit la souris ===== -->
+  <div class="torch" id="torch" aria-hidden="true"></div>
 
-    <nav class="links">
-      <a href="#apropos">À propos</a>
-      <a href="#contact">Contact</a>
+  <!-- ===== Curseur personnalise ===== -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- ===== Barre de progression ===== -->
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- ===== Navigation ===== -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__logo">CORNER<span>69</span></a>
+    <nav class="nav__links">
+      <a href="#apropos" data-magnetic>À propos</a>
+      <a href="#services" data-magnetic>Services</a>
+      <a href="#contact" data-magnetic>Contact</a>
     </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="Menu">
+      <i></i><i></i>
+    </button>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <main id="top">
+    <section class="hero">
+      <p class="hero__tag" data-reveal>Ouvert 7j/7 &middot; 24h/24</p>
+
+      <h1 class="hero__title" aria-label="CORNER69">
+        <span class="line"><span class="word" data-split>CORNER</span><span class="word accent" data-split>69</span></span>
+      </h1>
+
+      <p class="hero__lede" data-reveal data-delay="120">
+        Une adresse, une ambiance. Néons, bitume mouillé, deux-roues et bonne humeur —
+        sept jours sur sept, quelle que soit l'heure.
+      </p>
+
+      <div class="hero__cta" data-reveal data-delay="220">
+        <a href="#contact" class="btn btn--fill" data-magnetic>
+          <span>Nous trouver</span>
+        </a>
+        <a href="#services" class="btn btn--ghost" data-magnetic>
+          <span>Nos services</span>
+        </a>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true">
+        <span>Défiler</span>
+        <i></i>
+      </div>
+    </section>
+
+    <!-- ===== Bandeau defilant ===== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>7—24H <b>·</b> GOOD VIBES ONLY <b>·</b> CORNER69 <b>·</b> OUVERT TOUS LES JOURS <b>·</b> </span>
+        <span>7—24H <b>·</b> GOOD VIBES ONLY <b>·</b> CORNER69 <b>·</b> OUVERT TOUS LES JOURS <b>·</b> </span>
+      </div>
+    </div>
+
+    <!-- ===== A propos ===== -->
+    <section class="section" id="apropos">
+      <div class="section__grid">
+        <div class="section__aside">
+          <span class="section__num">01</span>
+          <h2 class="section__title" data-reveal>À propos</h2>
+        </div>
+        <div class="section__body">
+          <p data-reveal>
+            CORNER69 est né d'une idée simple : un lieu qui ne ferme jamais, où l'on entre
+            pour un café à six heures du matin comme pour refaire le monde à trois heures du matin.
+          </p>
+          <p data-reveal data-delay="100">
+            On y croise des motards, des noctambules, des habitués pressés et des curieux.
+            L'enseigne est jaune, la lumière est bleue, et la porte reste ouverte.
+          </p>
+
+          <dl class="stats" data-reveal data-delay="160">
+            <div>
+              <dt class="counter" data-target="168">0</dt>
+              <dd>heures ouvertes par semaine</dd>
+            </div>
+            <div>
+              <dt class="counter" data-target="7">0</dt>
+              <dd>jours sur sept</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Services ===== -->
+    <section class="section" id="services">
+      <div class="section__grid">
+        <div class="section__aside">
+          <span class="section__num">02</span>
+          <h2 class="section__title" data-reveal>Services</h2>
+        </div>
+        <div class="section__body">
+          <ul class="cards">
+            <li class="card" data-reveal data-tilt>
+              <span class="card__num">01</span>
+              <h3>Restaurant</h3>
+              <p>Snacking, plats à emporter, service continu de sept heures à minuit.</p>
+            </li>
+            <li class="card" data-reveal data-delay="80" data-tilt>
+              <span class="card__num">02</span>
+              <h3>Deux-roues</h3>
+              <p>Point de ralliement, stationnement en façade, espace pour les casques.</p>
+            </li>
+            <li class="card" data-reveal data-delay="160" data-tilt>
+              <span class="card__num">03</span>
+              <h3>Événements</h3>
+              <p>Soirées, expositions, showcases. L'arrière-salle se réserve.</p>
+            </li>
+            <li class="card" data-reveal data-delay="240" data-tilt>
+              <span class="card__num">04</span>
+              <h3>Boutique</h3>
+              <p>Sélection de vêtements et accessoires aux couleurs de la maison.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="section section--end" id="contact">
+      <div class="section__grid">
+        <div class="section__aside">
+          <span class="section__num">03</span>
+          <h2 class="section__title" data-reveal>Contact</h2>
+        </div>
+        <div class="section__body">
+          <p class="contact__big" data-reveal>
+            Une question, une réservation, une idée ?
+          </p>
+          <p data-reveal data-delay="80">
+            <a href="mailto:contact@corner69.example" class="link-underline">contact@corner69.example</a>
+          </p>
+          <p data-reveal data-delay="140">
+            <a href="tel:+33000000000" class="link-underline">00 00 00 00 00</a>
+          </p>
+
+          <div class="hours" data-reveal data-delay="200">
+            <div class="hours__row"><span>Lundi — Jeudi</span><b>07h00 — 24h00</b></div>
+            <div class="hours__row"><span>Vendredi — Samedi</span><b>07h00 — 24h00</b></div>
+            <div class="hours__row"><span>Dimanche</span><b>07h00 — 24h00</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <section id="apropos" class="panel">
-    <h2>À propos</h2>
-    <p>
-      CORNER69 est un espace ouvert jour et nuit : deux-roues, ambiance urbaine, lumière bleue
-      et jaune. Ce site sert de vitrine — remplacez ce texte par votre présentation,
-      vos horaires et vos actualités.
-    </p>
-  </section>
-
-  <footer id="contact" class="panel">
-    <h2>Contact</h2>
-    <p>Une question, un projet ? Écrivez-nous.</p>
-    <p class="muted">© 2026 CORNER69</p>
+  <!-- ===== Pied de page ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__logo">CORNER<span>69</span></span>
+      <p>© 2026 CORNER69 — Tous droits réservés.</p>
+      <a href="#top" class="footer__top" data-magnetic>Retour en haut ↑</a>
+    </div>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
