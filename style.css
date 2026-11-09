@@ -14,7 +14,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Image verticale 9:16, affichée en entier */
+/* Image verticale 9:16, affichee en entier, fixee en fond */
 .background {
   position: fixed;
   inset: 0;
@@ -42,7 +42,7 @@ body {
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(180deg, rgba(5,7,13,0.50) 0%, rgba(5,7,13,0.18) 45%, rgba(5,7,13,0.88) 100%);
+    linear-gradient(180deg, rgba(5,7,13,0.45) 0%, rgba(5,7,13,0.15) 45%, rgba(5,7,13,0.85) 100%);
   pointer-events: none;
 }
 
@@ -112,12 +112,13 @@ h1 strong {
   border-color: #ffb347;
 }
 
+/* Sections A propos et Contact : voile leger, l'image reste visible */
 .panel {
   position: relative;
   z-index: 2;
-  background: rgba(5,7,13,0.92);
-  backdrop-filter: blur(8px);
-  border-top: 1px solid rgba(127,212,255,0.18);
+  background: rgba(5,7,13,0.28);
+  backdrop-filter: blur(2px);
+  border-top: 1px solid rgba(127,212,255,0.20);
   padding: 4rem 7vw;
   max-width: 900px;
 }
@@ -128,16 +129,18 @@ h1 strong {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #ffb347;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.85);
 }
 
 .panel p {
   margin: 0 0 0.8rem;
   line-height: 1.7;
-  color: #dfe6ef;
+  color: #f0f4f9;
   max-width: 40rem;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.85);
 }
 
-.muted { color: #8592a3; font-size: 0.85rem; }
+.muted { color: #b9c3d1; font-size: 0.85rem; }
 
 footer.panel { padding-bottom: 5rem; }
 
