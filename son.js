@@ -9,10 +9,18 @@
 
   /* ---------------------------------------------------------
      RÉGLAGE DU VOLUME — la seule valeur à modifier.
-     0 = muet · 0.2 = discret (par défaut) · 0.35 = fond sonore ·
-     0.5 = moyen · 1 = maximum
+     0.05 = à peine perceptible (par défaut, valeur actuelle)
+     0.1  = très discret
+     0.2  = discret
+     0.35 = fond sonore présent
+     0.5  = moyen
+     1    = maximum
+
+     0 = muet total.
+     0.05 correspond à 5 % du volume de l'appareil : on l'entend
+     seulement si l'on tend l'oreille, il ne s'impose pas.
      --------------------------------------------------------- */
-  var VOLUME = 0.2;
+  var VOLUME = 0.05;
 
   /* ---------------------------------------------------------
      FICHIERS SOURCES — le navigateur prend le premier format
