@@ -48,16 +48,78 @@
 
   <!-- ===== Navigation ===== -->
   <header class="nav" id="nav">
-    <a href="#top" class="nav__logo">CORNER<span>69</span></a>
-    <nav class="nav__links">
-      <a href="#apropos" data-magnetic>À propos</a>
-      <a href="#services" data-magnetic>Services</a>
-      <a href="#contact" data-magnetic>Contact</a>
+    <a href="#top" class="nav__logo" data-magnetic>
+      <span class="nav__logo-mark">C<span>69</span></span>
+    </a>
+
+    <nav class="nav__links" id="navLinks" aria-label="Navigation principale">
+      <span class="nav__pill" id="navPill" aria-hidden="true"></span>
+      <a href="#apropos" class="nav__link" data-link="apropos" data-magnetic>
+        <span class="nav__link-text" data-label="À propos">À propos</span>
+      </a>
+      <a href="#services" class="nav__link" data-link="services" data-magnetic>
+        <span class="nav__link-text" data-label="Services">Services</span>
+      </a>
+      <a href="#contact" class="nav__link" data-link="contact" data-magnetic>
+        <span class="nav__link-text" data-label="Contact">Contact</span>
+      </a>
     </nav>
-    <button class="nav__toggle" id="navToggle" aria-label="Menu">
-      <i></i><i></i>
-    </button>
+
+    <div class="nav__end">
+      <a href="#contact" class="nav__cta" data-magnetic>
+        <span>Réserver</span>
+      </a>
+
+      <button class="nav__burst" id="navBurst" type="button"
+              aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navOverlay">
+        <span class="nav__burst-lines"><i></i><i></i></span>
+      </button>
+    </div>
   </header>
+
+  <!-- ===== Menu plein ecran ===== -->
+  <div class="overlay" id="navOverlay" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="overlay__inner">
+      <nav class="overlay__nav" aria-label="Menu principal">
+        <a href="#top" class="overlay__link" data-index="00">
+          <span class="overlay__num">00</span>
+          <span class="overlay__word" data-label="Accueil">Accueil</span>
+        </a>
+        <a href="#apropos" class="overlay__link" data-index="01">
+          <span class="overlay__num">01</span>
+          <span class="overlay__word" data-label="À propos">À propos</span>
+        </a>
+        <a href="#services" class="overlay__link" data-index="02">
+          <span class="overlay__num">02</span>
+          <span class="overlay__word" data-label="Services">Services</span>
+        </a>
+        <a href="#contact" class="overlay__link" data-index="03">
+          <span class="overlay__num">03</span>
+          <span class="overlay__word" data-label="Contact">Contact</span>
+        </a>
+      </nav>
+
+      <div class="overlay__aside">
+        <div class="overlay__block">
+          <span class="overlay__label">Horaires</span>
+          <p>7j/7 — 24h/24</p>
+        </div>
+        <div class="overlay__block">
+          <span class="overlay__label">Email</span>
+          <p><a href="mailto:contact@corner69.example">contact@corner69.example</a></p>
+        </div>
+        <div class="overlay__block">
+          <span class="overlay__label">Téléphone</span>
+          <p><a href="tel:+33000000000">00 00 00 00 00</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay__foot">
+      <span>CORNER69</span>
+      <span>Good vibes only</span>
+    </div>
+  </div>
 
   <!-- ===== Hero ===== -->
   <main id="top">
