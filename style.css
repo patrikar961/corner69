@@ -1,0 +1,129 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  color: #f5f5f5;
+  background: #05070d;
+  background-image: url("bg.jpg");
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5,7,13,0.72) 0%, rgba(5,7,13,0.45) 40%, rgba(5,7,13,0.92) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 8vh 7vw;
+  max-width: 900px;
+}
+
+.tagline {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #7fd4ff;
+}
+
+h1 {
+  margin: 0.2rem 0 0;
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  font-weight: 800;
+  text-shadow: 0 0 38px rgba(255,179,71,0.45), 0 4px 24px rgba(0,0,0,0.65);
+}
+
+h1 strong {
+  color: #ffb347;
+  font-weight: 800;
+}
+
+.lede {
+  max-width: 34rem;
+  margin: 0.6rem 0 0;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  line-height: 1.6;
+  color: #dfe6ef;
+}
+
+.links {
+  display: flex;
+  gap: 1.4rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.links a {
+  color: #7fd4ff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(127,212,255,0.35);
+  padding-bottom: 0.25rem;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.links a:hover {
+  color: #ffb347;
+  border-color: #ffb347;
+}
+
+.panel {
+  position: relative;
+  z-index: 1;
+  background: rgba(5,7,13,0.86);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(127,212,255,0.18);
+  padding: 4rem 7vw;
+  max-width: 900px;
+}
+
+.panel h2 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffb347;
+}
+
+.panel p {
+  margin: 0 0 0.8rem;
+  line-height: 1.7;
+  color: #dfe6ef;
+  max-width: 40rem;
+}
+
+.muted { color: #8592a3; font-size: 0.85rem; }
+
+footer.panel { padding-bottom: 5rem; }
+
+@media (max-width: 640px) {
+  body { background-attachment: scroll; }
+  .hero { padding: 14vh 6vw 10vh; }
+  .links { gap: 1rem; }
+}
