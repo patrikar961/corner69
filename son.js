@@ -2,6 +2,7 @@
    CORNER69 — fond sonore
    Aucune interface visible : le son se lance au premier clic
    sur la page, avec le volume fixe ci-dessous.
+   La piste est jouee UNE SEULE FOIS.
    ========================================================= */
 (function () {
   'use strict';
@@ -32,22 +33,25 @@
     audio.appendChild(source);
   });
 
-  audio.loop = true;
+  /* pas de boucle : la piste joue une seule fois */
+  audio.loop = false;
   audio.preload = 'none';
   audio.volume = VOLUME;
 
-  var lance = false;
+  var termine = false; // devient vrai quand la piste est finie ou coupee
 
   function demarrer() {
-    if (lance) return;
+    if (termine) return;
     var p = audio.play();
-    if (p && typeof p.then === 'function') {
-      p.then(function () { lance = true; })
-       .catch(function () { lance = false; });
-    } else {
-      lance = true;
+    if (p && typeof p.catch === 'function') {
+      p.catch(function () { /* fichier absent ou lecture bloquee */ });
     }
   }
+
+  /* la piste s'arrete d'elle-meme a la fin : on ne la relance pas */
+  audio.addEventListener('ended', function () {
+    termine = true;
+  });
 
   function premierGeste() {
     demarrer();
