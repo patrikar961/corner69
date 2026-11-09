@@ -14,7 +14,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Image plein écran : elle remplit toute la fenêtre */
+/* Image affichée en entier : ratio 16:9 calé sur la hauteur de l'écran */
 .background {
   position: fixed;
   inset: 0;
@@ -22,14 +22,18 @@ body {
   height: 100vh;
   z-index: 0;
   background: #05070d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
 .background img {
   display: block;
-  width: 100%;
+  width: auto;
   height: 100%;
-  object-fit: cover;
+  max-width: none;
+  object-fit: contain;
   object-position: center;
 }
 
@@ -38,11 +42,11 @@ body {
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(180deg, rgba(5,7,13,0.45) 0%, rgba(5,7,13,0.18) 45%, rgba(5,7,13,0.88) 100%);
+    linear-gradient(180deg, rgba(5,7,13,0.50) 0%, rgba(5,7,13,0.20) 45%, rgba(5,7,13,0.88) 100%);
   pointer-events: none;
 }
 
-/* Le contenu se superpose à l'image plein écran */
+/* Le contenu se superpose à l'image */
 .hero {
   position: relative;
   z-index: 2;
@@ -137,6 +141,14 @@ h1 strong {
 .muted { color: #8592a3; font-size: 0.85rem; }
 
 footer.panel { padding-bottom: 5rem; }
+
+/* Sur écran étroit (téléphone), l'image reste entière : ratio 16:9 pleine largeur */
+@media (max-aspect-ratio: 16/9) {
+  .background img {
+    width: 100%;
+    height: auto;
+  }
+}
 
 @media (max-width: 640px) {
   .hero { padding: 10vh 6vw 8vh; }
