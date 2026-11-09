@@ -8,10 +8,10 @@
 
   /* ---------------------------------------------------------
      RÉGLAGE DU VOLUME — la seule valeur à modifier.
-     0 = muet · 0.2 = discret · 0.35 = fond sonore ·
+     0 = muet · 0.2 = discret (par défaut) · 0.35 = fond sonore ·
      0.5 = moyen · 1 = maximum
      --------------------------------------------------------- */
-  var VOLUME = 0.35;
+  var VOLUME = 0.2;
 
   var audio = document.createElement('audio');
   audio.src = 'ambiance.mp3';
