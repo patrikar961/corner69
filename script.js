@@ -253,19 +253,123 @@
   }
 
   /* -------------------------------------------------------
-     11. Menu mobile
+     11. Navigation : pilule glissante, onglet actif, menu plein ecran
      ------------------------------------------------------- */
-  function mobileMenu() {
-    var btn = document.getElementById('navToggle');
-    if (!btn) return;
-    btn.addEventListener('click', function () {
-      document.body.classList.toggle('nav-open');
+  function navigation() {
+    var linksWrap = document.getElementById('navLinks');
+    var pill = document.getElementById('navPill');
+    var links = document.querySelectorAll('.nav__link');
+    var burst = document.getElementById('navBurst');
+    var overlay = document.getElementById('navOverlay');
+    var overlayLinks = document.querySelectorAll('.overlay__link');
+
+    var activeLink = null;
+
+    function movePill(el) {
+      if (!pill || !el || !linksWrap) return;
+      var wrapRect = linksWrap.getBoundingClientRect();
+      var r = el.getBoundingClientRect();
+      pill.style.width = r.width + 'px';
+      pill.style.transform = 'translateX(' + (r.left - wrapRect.left) + 'px)';
+      pill.classList.add('is-on');
+    }
+
+    function hidePill() {
+      if (!pill) return;
+      if (activeLink) { movePill(activeLink); return; }
+      pill.classList.remove('is-on');
+    }
+
+    links.forEach(function (a) {
+      a.addEventListener('mouseenter', function () { movePill(a); });
     });
-    document.querySelectorAll('.nav__links a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        document.body.classList.remove('nav-open');
+    if (linksWrap) linksWrap.addEventListener('mouseleave', hidePill);
+
+    function setActive(id) {
+      links.forEach(function (a) {
+        var on = a.getAttribute('data-link') === id;
+        a.classList.toggle('is-active', on);
+        if (on) activeLink = a;
       });
+      if (activeLink) movePill(activeLink); else hidePill();
+    }
+
+    var chapitres = ['apropos', 'services', 'contact'];
+    var sections = chapitres
+      .map(function (id) { return document.getElementById(id); })
+      .filter(Boolean);
+
+    function updateActive() {
+      if (!sections.length) return;
+      var seuil = window.innerHeight * 0.45;
+      var courant = null;
+
+      sections.forEach(function (s) {
+        var r = s.getBoundingClientRect();
+        if (r.top <= seuil && r.bottom > seuil) courant = s.id;
+      });
+
+      if (!courant && window.scrollY < window.innerHeight * 0.6) {
+        links.forEach(function (a) { a.classList.remove('is-active'); });
+        activeLink = null;
+        hidePill();
+        return;
+      }
+      if (courant) setActive(courant);
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { updateActive(); ticking = false; });
+    }, { passive: true });
+    window.addEventListener('resize', function () { updateActive(); });
+    setTimeout(updateActive, 1800);
+
+    function ouvrir() {
+      document.body.classList.add('overlay-open');
+      document.body.classList.add('is-locked');
+      if (burst) {
+        burst.setAttribute('aria-expanded', 'true');
+        burst.setAttribute('aria-label', 'Fermer le menu');
+      }
+      var premier = overlay ? overlay.querySelector('.overlay__link') : null;
+      if (premier) setTimeout(function () { premier.focus(); }, 320);
+    }
+
+    function fermer() {
+      document.body.classList.remove('overlay-open');
+      document.body.classList.remove('is-locked');
+      if (burst) {
+        burst.setAttribute('aria-expanded', 'false');
+        burst.setAttribute('aria-label', 'Ouvrir le menu');
+      }
+    }
+
+    function basculer() {
+      if (document.body.classList.contains('overlay-open')) fermer();
+      else ouvrir();
+    }
+
+    if (burst) burst.addEventListener('click', basculer);
+
+    overlayLinks.forEach(function (a) {
+      a.addEventListener('click', function () { fermer(); });
     });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.body.classList.contains('overlay-open')) {
+        fermer();
+        if (burst) burst.focus();
+      }
+    });
+
+    if (overlay) {
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) fermer();
+      });
+    }
   }
 
   /* -------------------------------------------------------
@@ -283,7 +387,7 @@
     magnetic();
     tilt();
     counters();
-    mobileMenu();
+    navigation();
 
     setTimeout(function () { document.body.classList.remove('is-locked'); }, 1800);
   }
