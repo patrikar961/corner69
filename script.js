@@ -9,6 +9,7 @@
 
   /* -------------------------------------------------------
      1. Écran de chargement — le C69
+     Quand il s'efface, l'accueil fait son entrée.
      ------------------------------------------------------- */
   function chargement() {
     var loader = document.getElementById('loader');
@@ -17,9 +18,17 @@
         loader.classList.add('is-off');
         setTimeout(function () { loader.style.display = 'none'; }, 800);
       }
+      // déclenche l'entrée du titre et du texte de l'accueil
+      setTimeout(function () {
+        document.body.classList.add('pret');
+      }, 120);
     };
 
-    if (calm) { fini(); return; }
+    if (calm) {
+      document.body.classList.add('pret');
+      if (loader) loader.style.display = 'none';
+      return;
+    }
 
     var delai = new Promise(function (r) { setTimeout(r, 1600); });
     var image = document.getElementById('bgImage');
@@ -54,27 +63,38 @@
 
   /* -------------------------------------------------------
      3. Apparition douce des sections
+     Le bloc entier monte, puis ses éléments l'un après l'autre.
      ------------------------------------------------------- */
   function apparitions() {
-    var cibles = document.querySelectorAll('.block');
-    if (!cibles.length) return;
+    var blocs = document.querySelectorAll('.block');
+    if (!blocs.length) return;
 
     if (calm || !('IntersectionObserver' in window)) {
-      cibles.forEach(function (el) { el.classList.add('soft', 'on'); });
+      blocs.forEach(function (el) { el.classList.add('soft', 'on'); });
+      document.querySelectorAll('.lift').forEach(function (el) {
+        el.classList.add('on');
+      });
       return;
     }
 
-    cibles.forEach(function (el) { el.classList.add('soft'); });
+    blocs.forEach(function (el) { el.classList.add('soft'); });
 
     var io = new IntersectionObserver(function (entrees) {
       entrees.forEach(function (e) {
         if (!e.isIntersecting) return;
-        e.target.classList.add('on');
-        io.unobserve(e.target);
+        var bloc = e.target;
+        bloc.classList.add('on');
+
+        // les paragraphes du bloc montent l'un après l'autre
+        bloc.querySelectorAll('.lift').forEach(function (el, i) {
+          setTimeout(function () { el.classList.add('on'); }, 180 + i * 90);
+        });
+
+        io.unobserve(bloc);
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 
-    cibles.forEach(function (el) { io.observe(el); });
+    blocs.forEach(function (el) { io.observe(el); });
   }
 
   /* -------------------------------------------------------
