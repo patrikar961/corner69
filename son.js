@@ -13,8 +13,25 @@
      --------------------------------------------------------- */
   var VOLUME = 0.2;
 
+  /* ---------------------------------------------------------
+     FICHIERS SOURCES — le navigateur prend le premier format
+     qu'il sait lire. Le m4a passe sur Safari et Chrome ;
+     ajoutez ambiance.mp3 si vous voulez couvrir tous les cas.
+     --------------------------------------------------------- */
+  var SOURCES = [
+    { src: 'ambiance.m4a', type: 'audio/mp4' },
+    { src: 'ambiance.mp3', type: 'audio/mpeg' }
+  ];
+
   var audio = document.createElement('audio');
-  audio.src = 'ambiance.mp3';
+
+  SOURCES.forEach(function (s) {
+    var source = document.createElement('source');
+    source.src = s.src;
+    source.type = s.type;
+    audio.appendChild(source);
+  });
+
   audio.loop = true;
   audio.preload = 'none';
   audio.volume = VOLUME;
