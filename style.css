@@ -3,6 +3,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
   min-height: 100%;
 }
 
@@ -13,34 +14,35 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Image de fond affichée en entier, sans recadrage */
+/* Image plein écran : elle remplit toute la fenêtre */
 .background {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 0;
   background: #05070d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
 }
 
 .background img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
 }
 
 .overlay {
   position: fixed;
   inset: 0;
-  background:
-    linear-gradient(180deg, rgba(5,7,13,0.55) 0%, rgba(5,7,13,0.30) 40%, rgba(5,7,13,0.88) 100%);
-  pointer-events: none;
   z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(5,7,13,0.45) 0%, rgba(5,7,13,0.18) 45%, rgba(5,7,13,0.88) 100%);
+  pointer-events: none;
 }
 
+/* Le contenu se superpose à l'image plein écran */
 .hero {
   position: relative;
   z-index: 2;
@@ -110,7 +112,7 @@ h1 strong {
 .panel {
   position: relative;
   z-index: 2;
-  background: rgba(5,7,13,0.90);
+  background: rgba(5,7,13,0.92);
   backdrop-filter: blur(8px);
   border-top: 1px solid rgba(127,212,255,0.18);
   padding: 4rem 7vw;
